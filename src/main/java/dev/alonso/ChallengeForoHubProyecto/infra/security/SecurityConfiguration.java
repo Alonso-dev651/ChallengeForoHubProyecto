@@ -17,6 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration {
 
+    @Autowired
+    private AuthenticationEntryPointFilter authenticationEntryPointFilter;
+
     @Autowired(required = true)
     private SecurityFilter securityFilter;
 
@@ -32,12 +35,18 @@ public class SecurityConfiguration {
                         .authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling((exception) ->
+                        exception.authenticationEntryPoint(authenticationEntryPointFilter))
                 .build();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    public SecurityConfiguration(AuthenticationEntryPointFilter authenticationEntryPointFilter) {
+        this.authenticationEntryPointFilter = authenticationEntryPointFilter;
     }
 
     @Bean
