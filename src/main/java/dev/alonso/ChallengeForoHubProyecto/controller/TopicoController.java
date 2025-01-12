@@ -1,19 +1,16 @@
 package dev.alonso.ChallengeForoHubProyecto.controller;
 
-import dev.alonso.ChallengeForoHubProyecto.domain.topico.DatosRegistroTopico;
-import dev.alonso.ChallengeForoHubProyecto.domain.topico.DatosRespuestaTopico;
-import dev.alonso.ChallengeForoHubProyecto.domain.topico.Topico;
-import dev.alonso.ChallengeForoHubProyecto.domain.topico.TopicoRepositorio;
+import dev.alonso.ChallengeForoHubProyecto.domain.topico.*;
 import dev.alonso.ChallengeForoHubProyecto.domain.usuarios.UsuarioRepositorio;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -42,5 +39,11 @@ public class TopicoController {
 
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(newTopico.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaTopico);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DatosListadoTopico>> topicoList(@PageableDefault(size = 2)
+                                                               Pageable pageable) {
+        return ResponseEntity.ok(topicoRepositorio.findByStatusTrue(pageable).map(DatosListadoTopico::new));
     }
 }
