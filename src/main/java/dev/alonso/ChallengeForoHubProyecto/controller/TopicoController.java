@@ -46,4 +46,13 @@ public class TopicoController {
                                                                Pageable pageable) {
         return ResponseEntity.ok(topicoRepositorio.findByStatusTrue(pageable).map(DatosListadoTopico::new));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRespuestaTopico> obtenerDatosTopico(@PathVariable Long id) {
+        Topico topico = topicoRepositorio.getReferenceById(id);
+        var datosTopico = new DatosRespuestaTopico(
+                topico.getId(), topico.getAutor(), topico.getTitulo(), topico.getMensaje(), topico.getFecha_de_creacion()
+        );
+        return ResponseEntity.ok(datosTopico);
+    }
 }
