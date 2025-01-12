@@ -50,6 +50,30 @@ public class Topico {
         this.status = true;
     }
 
+    public void actualizarDatos(@Valid DatosActualizarTopico datosActualizarTopico) {
+        if (datosActualizarTopico.autor() != null) {
+            this.autor = datosActualizarTopico.autor();
+        }
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if (datosActualizarTopico.mensaje() != null) {
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+    }
+
+    public void actualizarDatosTopicoEspecifico(@Valid DatosActulizarTopicoEspecifico datosActulizarTopicoEspecifico) {
+        if (datosActulizarTopicoEspecifico.autor() != null) {
+            this.autor = datosActulizarTopicoEspecifico.autor();
+        }
+        if (datosActulizarTopicoEspecifico.titulo() != null) {
+            this.titulo = datosActulizarTopicoEspecifico.titulo();
+        }
+        if (datosActulizarTopicoEspecifico.mensaje() != null) {
+            this.mensaje = datosActulizarTopicoEspecifico.mensaje();
+        }
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
