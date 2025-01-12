@@ -74,6 +74,10 @@ public class Topico {
         }
     }
 
+    public void desactivarTopico() {
+        this.status = false;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

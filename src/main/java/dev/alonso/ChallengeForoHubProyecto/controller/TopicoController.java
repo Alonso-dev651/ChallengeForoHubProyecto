@@ -81,4 +81,17 @@ public class TopicoController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosDeteleLogico> eliminarTopico(@PathVariable Long id) {
+        if (topicoRepositorio.existsById(id)) {
+            Topico topico = topicoRepositorio.getReferenceById(id);
+            topico.desactivarTopico();
+            return ResponseEntity.ok(new DatosDeteleLogico(topico.getId(), topico.getAutor(),
+                    topico.getTitulo(), topico.getFecha_de_creacion(), topico.getStatus()));
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
