@@ -5,6 +5,8 @@
 Este repositorio contiene mi solución al desafío, que consiste en desarrollar una **API REST** utilizando **Spring Boot 3**.  
 El proyecto, llamado **ForoHub**, simula el funcionamiento de un foro.  
 
+**EDIT** En este repositorio [Foro-API-Spring](https://github.com/Alonso-dev651/Foro-API-Spring) estoy realizando un version mejorada.
+
 ## Funcionalidades  
 - **Iniciar sesión:** Al ingresar un email y contraseña válidos, se genera un token JWT que permite acceder a las demás funcionalidades de forma segura.  
 - **Crear un tópico:** Los usuarios pueden generar nuevos temas de discusión en el foro.  
